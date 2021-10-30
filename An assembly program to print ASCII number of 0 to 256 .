@@ -1,0 +1,36 @@
+include emu8086.inc  
+
+.stack 100h    
+
+.model small
+
+.data 
+
+.code          
+
+    main proc  
+        
+        mov cx,256 ; that means i decleared counter register value to count the value upto 256
+        
+        mov dl,0    ; that means we initially send 0 to dl register to print ascii value from 0
+        
+        
+        top:
+            mov ah,02h  ; this line helps to display answer 
+                                     
+            
+            int 21h     ; helps to interrupt and display next symbol/character/number
+            
+            inc dl       ; this helps to increment value such as i++ 
+            
+            loop top     ; that means this loop will not stop until the value of cx is  0,
+            
+                                                                                                                        
+                                                                                                                        
+        mov ah,4ch   ; this line and next line helps the register to return back to the cpu to execute another operation
+        
+        int 21h 
+        
+     main endp 
+    
+end main
