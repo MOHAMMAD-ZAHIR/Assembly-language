@@ -1,0 +1,36 @@
+include emu8086.inc  
+
+.stack 100h    
+
+.model small
+
+.data 
+
+.code          
+
+    main proc  
+        
+        mov cx,10 
+        
+        mov dl,0 
+        add dl,48  
+        
+        
+        top:
+            mov ah,02h  
+                                     
+            
+            int 21h     
+            
+            inc dl       
+            loop top     
+            
+                                                                                                                        
+                                                                                                                        
+        mov ah,4ch  
+        
+        int 21h 
+        
+     main endp 
+    
+end main
