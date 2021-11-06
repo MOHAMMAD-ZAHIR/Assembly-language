@@ -1,0 +1,74 @@
+.MODEL SMALL
+.STACK 100H
+
+.DATA
+    MSG1 DB 10,13,'Enter your first number : $'
+    MSG2 DB 10,13,'Enter your second number : $'
+    MSG3 DB 10,13,'Your Result:',10,13,9,'The Quotient is : $'  
+    MSG4 DB ' and',10,13,9,'The Reminder is : $'
+    
+    NUM1 DB ?
+    NUM2 DB ? 
+    RES1 DB ?
+    RES2 DB ?
+    
+.CODE
+    MAIN PROC
+        MOV AX, @DATA
+        MOV DS, AX  
+        
+        LEA DX, MSG1
+        MOV AH, 9
+        INT 21H
+              
+        ; first number input
+        MOV AH, 1
+        INT 21H 
+        SUB AL, 30H
+        MOV NUM1, AL   
+        
+        LEA DX, MSG2
+        MOV AH, 9
+        INT 21H
+             
+        ; 2nd number input
+        MOV AH, 1
+        INT 21H
+        SUB AL, 30H
+        MOV NUM2, AL
+           
+        
+        ; operation
+        MOV AH, 0 
+        MOV AL, NUM1
+        DIV NUM2 
+        ADD AL, 30H 
+        ADD AH, 30H
+        MOV RES1, AL
+        MOV RES2, AH
+            
+        ; Massage print   
+        LEA DX, MSG3
+        MOV AH, 9
+        INT 21H
+        
+        ; vagfol print
+        MOV AH, 2
+        MOV DL, RES1
+        INT 21H 
+              
+        ; massage print      
+        LEA DX, MSG4
+        MOV AH, 9
+        INT 21H
+        
+        ; vagshesh print
+        MOV AH, 2
+        MOV DL, RES2
+        INT 21H
+        
+     
+    MOV AH, 4CH
+    INT 21H 
+    MAIN ENDP
+END MAIN
